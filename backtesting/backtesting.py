@@ -75,8 +75,13 @@ class Strategy(metaclass=ABCMeta):
 
     def I(self,  # noqa: E741, E743
           func: Callable, *args,
+<<<<<<< HEAD
           name=None, plot=True, overlay=None, color=None, scatter=False, histogram=False,
           **kwargs) -> np.ndarray:
+=======
+          name=None, plot=True, overlay=None, color=None, scatter=False,
+          legends=None, **kwargs) -> np.ndarray:
+>>>>>>> a95c555 (Allow setting legend names when multiple series values are used in an Indicator kernc#382)
         """
         Declare indicator. An indicator is just an array of values,
         but one that is revealed gradually in
@@ -108,6 +113,10 @@ class Strategy(metaclass=ABCMeta):
         If `histogram` is `True`, the indicator values will be plotted
         as a histogram instead of line or circle. When `histogram` is
         `True`, 'scatter' value will be ignored even if it's set.
+
+        `legends` can be list or array of string values to represent
+        legends on your indicator chart. By default it's set to None,
+        and `name` is used as legends.
 
         Additional `*args` and `**kwargs` are passed to `func` and can
         be used for parameters.
@@ -157,7 +166,7 @@ class Strategy(metaclass=ABCMeta):
         value = _Indicator(value, name=name, plot=plot, overlay=overlay,
                            color=color, scatter=scatter, histogram=histogram,
                            # _Indicator.s Series accessor uses this:
-                           index=self.data.index)
+                           legends=legends, index=self.data.index)
         self._indicators.append(value)
         return value
 
