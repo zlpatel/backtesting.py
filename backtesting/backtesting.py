@@ -75,13 +75,8 @@ class Strategy(metaclass=ABCMeta):
 
     def I(self,  # noqa: E741, E743
           func: Callable, *args,
-<<<<<<< HEAD
           name=None, plot=True, overlay=None, color=None, scatter=False, histogram=False,
-          **kwargs) -> np.ndarray:
-=======
-          name=None, plot=True, overlay=None, color=None, scatter=False,
           legends=None, **kwargs) -> np.ndarray:
->>>>>>> a95c555 (Allow setting legend names when multiple series values are used in an Indicator kernc#382)
         """
         Declare indicator. An indicator is just an array of values,
         but one that is revealed gradually in
