@@ -1533,7 +1533,8 @@ class Backtest:
             'DrawdownDuration': dd_dur},
             index=index)
 
-        trades = broker.trades
+        trades = broker.closed_trades
+        active_trades = broker.trades
         trades_df = pd.DataFrame({
             'Size': [t.size for t in trades],
             'EntryBar': [t.entry_bar for t in trades],
@@ -1623,7 +1624,7 @@ class Backtest:
         s.loc['_strategy'] = strategy
         s.loc['_equity_curve'] = equity_df
         s.loc['_trades'] = trades_df
-
+        s.loc['_active_trades'] = active_trades
         s = Backtest._Stats(s)
         return s
 
