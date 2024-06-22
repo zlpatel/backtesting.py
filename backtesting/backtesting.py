@@ -1533,7 +1533,7 @@ class Backtest:
             'DrawdownDuration': dd_dur},
             index=index)
 
-        trades = broker.closed_trades
+        trades = broker.trades
         trades_df = pd.DataFrame({
             'Size': [t.size for t in trades],
             'EntryBar': [t.entry_bar for t in trades],
