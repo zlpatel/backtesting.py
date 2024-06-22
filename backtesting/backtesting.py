@@ -1533,8 +1533,19 @@ class Backtest:
             'DrawdownDuration': dd_dur},
             index=index)
 
-        trades = broker.closed_trades
         active_trades = broker.trades
+        active_trades_df = pd.DataFrame({
+            'Size': [t.size for t in active_trades],
+            'EntryBar': [t.entry_bar for t in active_trades],
+            'ExitBar': [t.exit_bar for t in active_trades],
+            'EntryPrice': [t.entry_price for t in active_trades],
+            'ExitPrice': [t.exit_price for t in active_trades],
+            'PnL': [t.pl for t in active_trades],
+            'ReturnPct': [t.pl_pct for t in active_trades],
+            'EntryTime': [t.entry_time for t in active_trades],
+            'ExitTime': [t.exit_time for t in active_trades],
+        })
+        trades = broker.closed_trades
         trades_df = pd.DataFrame({
             'Size': [t.size for t in trades],
             'EntryBar': [t.entry_bar for t in trades],
@@ -1624,7 +1635,7 @@ class Backtest:
         s.loc['_strategy'] = strategy
         s.loc['_equity_curve'] = equity_df
         s.loc['_trades'] = trades_df
-        s.loc['_active_trades'] = active_trades
+        s.loc['_active_trades'] = active_trades_df
         s = Backtest._Stats(s)
         return s
 
